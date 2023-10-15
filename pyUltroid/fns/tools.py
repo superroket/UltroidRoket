@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2022 TeamUltroid
+# Copyright (C) 2021-2023 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -585,7 +585,7 @@ def make_html_telegraph(title, html=""):
 
 async def Carbon(
     code,
-    base_url="https://carbonara.vercel.app/api/cook",
+    base_url="https://carbonara.solopov.dev/api/cook",
     file_name="ultroid",
     download=False,
     rayso=False,
