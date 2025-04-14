@@ -1,7 +1,7 @@
 # Required only for Local Deploys
 # ------------------------------------------------------ #
 
-git+https://github.com/ufoptg/akipy.git
+akipy
 apscheduler
 aiohttp
 bs4
@@ -24,6 +24,7 @@ pypdf2>=1.26.0
 pytz
 qrcode
 requests
+twikit
 tabulate
 telegraph
 tgcrypto

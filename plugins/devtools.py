@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2023 TeamUltroid
+# Copyright (C) 2021-2025 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -33,10 +33,8 @@ try:
     from yaml import safe_load
 except ImportError:
     from pyUltroid.fns.tools import safe_load
-try:
-    from telegraph import upload_file as uf
-except ImportError:
-    uf = None
+
+from . import upload_file as uf
 from telethon.tl import functions
 
 fn = functions
@@ -99,7 +97,7 @@ async def _(event):
                     f"Unknown Response from Carbon: `{li}`\n\nstdout`:{stdout}`\nstderr: `{stderr}`"
                 )
                 return
-            url = f"https://graph.org{uf(li)[-1]}"
+            url = uf(li)
             OUT = f"[\xad]({url}){OUT}"
             out = "**• OUTPUT:**"
             remove(li)
@@ -121,7 +119,7 @@ async def _(event):
                     f"Unknown Response from Carbon: `{li}`\n\nstdout`:{stdout}`\nstderr: `{stderr}`"
                 )
                 return
-            url = f"https://graph.org{uf(li)[-1]}"
+            url = uf(li)
             OUT = f"[\xad]({url}){OUT}"
             out = "**• OUTPUT:**"
             remove(li)
