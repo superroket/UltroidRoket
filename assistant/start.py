@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2025 TeamUltroid
+# Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -7,7 +7,10 @@
 
 from datetime import datetime
 
-from pytz import timezone as tz
+try:
+    from pytz import timezone as tz
+except ImportError:
+    tz = None
 from telethon import Button, events
 from telethon.errors.rpcerrorlist import MessageDeleteForbiddenError
 from telethon.utils import get_display_name
@@ -35,24 +38,24 @@ if Owner_info_msg is None:
 
 _settings = [
     [
-        Button.inline("API Kᴇʏs", data="cbs_apiset"),
-        Button.inline("Pᴍ Bᴏᴛ", data="cbs_chatbot"),
+        Button.inline("API Keys", data="cbs_apiset"),
+        Button.inline("PM Bot", data="cbs_chatbot"),
     ],
     [
-        Button.inline("Aʟɪᴠᴇ", data="cbs_alvcstm"),
-        Button.inline("PᴍPᴇʀᴍɪᴛ", data="cbs_ppmset"),
+        Button.inline("Alive", data="cbs_alvcstm"),
+        Button.inline("PMPermit", data="cbs_ppmset"),
     ],
     [
-        Button.inline("Fᴇᴀᴛᴜʀᴇs", data="cbs_otvars"),
-        Button.inline("VC Sᴏɴɢ Bᴏᴛ", data="cbs_vcb"),
+        Button.inline("Features", data="cbs_otvars"),
+        Button.inline("VC Song Bot", data="cbs_vcb"),
     ],
-    [Button.inline("« Bᴀᴄᴋ", data="mainmenu")],
+    [Button.inline("« Back", data="mainmenu")],
 ]
 
 _start = [
     [
-        Button.inline("Lᴀɴɢᴜᴀɢᴇ 🌐", data="lang"),
-        Button.inline("Sᴇᴛᴛɪɴɢs ⚙️", data="setter"),
+        Button.inline("Language 🌐", data="lang"),
+        Button.inline("Settings ⚙️", data="setter"),
     ],
     [
         Button.inline("Sᴛᴀᴛs ✨", data="stat"),
@@ -211,6 +214,11 @@ async def setting(event):
 @callback("tz", owner=True)
 async def timezone_(event):
     await event.delete()
+    if tz is None:
+        return await event.client.send_message(
+            event.sender_id,
+            f"`pytz` is not installed, TimeZone feature is unavailable.\n\nInstall it via `{HNDLR}update` or `{HNDLR}bash pip install pytz`.",
+        )
     pru = event.sender_id
     var = "TIMEZONE"
     name = "Timezone"

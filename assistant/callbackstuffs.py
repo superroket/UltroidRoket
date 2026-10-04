@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2025 TeamUltroid
+# Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -57,23 +57,23 @@ _buttons = {
                 Button.inline("SᴜᴘᴇʀFʙᴀɴ", data="cbs_sfban"),
             ],
             [
-                Button.inline("Sᴜᴅᴏ Mᴏᴅᴇ", data="sudo"),
-                Button.inline("Hᴀɴᴅʟᴇʀ", data="hhndlr"),
+                Button.inline("Sudo Mode", data="sudo"),
+                Button.inline("Handler", data="hhndlr"),
             ],
             [
-                Button.inline("Exᴛʀᴀ Pʟᴜɢɪɴs", data="plg"),
-                Button.inline("Aᴅᴅᴏɴs", data="eaddon"),
+                Button.inline("Extra Plugins", data="plg"),
+                Button.inline("Addons", data="eaddon"),
             ],
             [
-                Button.inline("Eᴍᴏᴊɪ ɪɴ Hᴇʟᴘ", data="emoj"),
-                Button.inline("Sᴇᴛ ɢDʀɪᴠᴇ", data="gdrive"),
+                Button.inline("Emoji in Help", data="emoj"),
+                Button.inline("Set gDrive", data="gdrive"),
             ],
             [
-                Button.inline("Iɴʟɪɴᴇ Pɪᴄ", data="inli_pic"),
-                Button.inline("Sᴜᴅᴏ HNDLR", data="shndlr"),
+                Button.inline("Inline Pic", data="inli_pic"),
+                Button.inline("Sudo HNDLR", data="shndlr"),
             ],
-            [Button.inline("Dᴜᴀʟ Mᴏᴅᴇ", "cbs_oofdm")],
-            [Button.inline("« Bᴀᴄᴋ", data="setter")],
+            [Button.inline("Dual Mode", "cbs_oofdm")],
+            [Button.inline("« Back", data="setter")],
         ],
     },
     "sfban": {

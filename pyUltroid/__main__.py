@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2025 TeamUltroid
+# Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -18,6 +18,7 @@ def main():
         WasItRestart,
         autopilot,
         customize,
+        keep_redis_alive,
         plug,
         ready,
         startup_stuff,
@@ -49,6 +50,7 @@ def main():
     LOGS.info("Initialising...")
 
     ultroid_bot.run_in_loop(autopilot())
+    ultroid_bot.loop.create_task(keep_redis_alive())
 
     pmbot = udB.get_key("PMBOT")
     manager = udB.get_key("MANAGER")
@@ -89,7 +91,7 @@ def main():
     ultroid_bot.run_in_loop(WasItRestart(udB))
 
     try:
-        cleanup_cache()
+        udB.re_cache()
     except BaseException:
         pass
 

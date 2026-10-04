@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2025 TeamUltroid
+# Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -33,9 +33,11 @@
 • `{i}webshot <url>`
     Get a screenshot of the webpage.
 """
+import asyncio
 import glob
 import io
 import os
+import re
 import secrets
 from asyncio.exceptions import TimeoutError as AsyncTimeout
 
@@ -53,6 +55,7 @@ try:
 except ImportError:
     WebShot = None
 
+from telethon import functions, types
 from telethon.errors.rpcerrorlist import MessageTooLongError, YouBlockedUserError
 from telethon.tl.types import (
     ChannelParticipantAdmin,
@@ -73,6 +76,7 @@ from . import (
     download_file,
     eor,
     get_string,
+    ultroid_bot,
 )
 from . import humanbytes as hb
 from . import inline_mention, is_url_ok, json_parser, mediainfo, ultroid_cmd
@@ -339,8 +343,12 @@ async def _(e):
 def sanga_seperator(sanga_list):
     string = "".join(info[info.find("\n") + 1 :] for info in sanga_list)
     string = re.sub(r"^$\n", "", string, flags=re.MULTILINE)
-    name, username = string.split("Usernames**")
-    name = name.split("Names")[1]
+    try:
+        name, username = string.split("Usernames**")
+        name = name.split("Names")[1]
+    except ValueError:
+        name = "No Names Found"
+        username = "No Usernames Found"
     return name, username
 
 
@@ -383,8 +391,8 @@ async def sangmata(event):
         try:
             await conv.send_message(f"{userinfo.id}")
         except YouBlockedUserError:
-            await catub(unblock("SangMata_beta_bot"))
-            await conv.send_message(f"{userinfo.id}")
+            return await event.edit("`Please unblock @SangMata_beta_bot and try again`")
+            # await conv.send_message(f"{userinfo.id}")
         responses = []
         while True:
             try:

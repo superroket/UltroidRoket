@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2025 TeamUltroid
+# Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -274,11 +274,11 @@ class RedisDB(_BaseDatabase):
         if platform.lower() == "qovery" and not host:
             var, hash_, host, password = "", "", "", ""
             for vars_ in os.environ:
-                if vars_.startswith("QOVERY_REDIS_") and vars.endswith("_HOST"):
+                if vars_.startswith("QOVERY_REDIS_") and vars_.endswith("_HOST"):
                     var = vars_
             if var:
                 hash_ = var.split("_", maxsplit=2)[1].split("_")[0]
-            if hash:
+            if hash_:
                 kwargs["host"] = os.environ.get(f"QOVERY_REDIS_{hash_}_HOST")
                 kwargs["port"] = os.environ.get(f"QOVERY_REDIS_{hash_}_PORT")
                 kwargs["password"] = os.environ.get(f"QOVERY_REDIS_{hash_}_PASSWORD")
@@ -314,7 +314,13 @@ class LocalDB(_BaseDatabase):
         return "LocalDB"
 
     def keys(self):
-        return self._cache.keys()
+        try:
+            raw = self.db._raw_data()
+            if isinstance(raw, dict):
+                return list(raw.keys())
+        except Exception:
+            pass
+        return list(self._cache.keys())
 
     def __repr__(self):
         return f"<Ultroid.LocalDB\n -total_keys: {len(self.keys())}\n>"

@@ -1,5 +1,5 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2025 TeamUltroid
+# Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
@@ -72,8 +72,12 @@ def load_other_plugins(addons=None, pmbot=None, manager=None, vcbot=None):
         if os.path.exists("addons") and not os.path.exists("addons/.git"):
             rmtree("addons")
         if not os.path.exists("addons"):
+            try:
+                branch = str(Repo().active_branch)
+            except Exception:
+                branch = "main"
             subprocess.run(
-                f"git clone -q -b {Repo().active_branch} https://github.com/TeamUltroid/UltroidAddons.git addons",
+                f"git clone -q -b {branch} https://github.com/TeamUltroid/UltroidAddons.git addons",
                 shell=True,
             )
         else:
